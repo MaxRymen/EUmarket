@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EU Cross-Border Helper</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="header-title">EU Cross-Border Helper</h1>
+            <p class="header-subtitle">Your guide to exporting goods from Belgium to France</p>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="#vat-check" class="nav-link active" data-step="vat-check">
+                                <span class="nav-icon">🔍</span>
+                                <span class="nav-text">VAT Check</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#contracts" class="nav-link" data-step="contracts">
+                                <span class="nav-icon">📋</span>
+                                <span class="nav-text">Contracts</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#food-safety" class="nav-link" data-step="food-safety">
+                                <span class="nav-icon">🍎</span>
+                                <span class="nav-text">Food Safety</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#labeling" class="nav-link" data-step="labeling">
+                                <span class="nav-icon">🏷️</span>
+                                <span class="nav-text">Labeling</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#transport" class="nav-link" data-step="transport">
+                                <span class="nav-icon">🚛</span>
+                                <span class="nav-text">Transport</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="content">
+                <div class="step-content" id="vat-check">
+                    <h2 class="step-title">VAT Number Validation</h2>
+                    <div class="step-description">
+                        <p>Validate your VAT number and ensure compliance with French tax requirements.</p>
+                    </div>
+                    <div class="step-instructions">
+                        <h3>What you need to do:</h3>
+                        <ul class="instruction-list">
+                            <li>Verify your Belgian VAT number is valid</li>
+                            <li>Check if you need to register for French VAT</li>
+                            <li>Understand the reverse charge mechanism</li>
+                            <li>Prepare necessary tax documentation</li>
+                        </ul>
+                    </div>
+                    <div class="step-actions">
+                        <button class="btn btn-primary">Validate VAT Number</button>
+                        <button class="btn btn-secondary">Learn More</button>
+                    </div>
+                </div>
+
+                <div class="step-content" id="contracts" style="display: none;">
+                    <h2 class="step-title">Contracts & Documentation</h2>
+                    <div class="step-description">
+                        <p>Upload and generate essential contracts and legal documents for your export.</p>
+                    </div>
+                    <div class="step-instructions">
+                        <h3>Required documents:</h3>
+                        <ul class="instruction-list">
+                            <li>Sales contract with French buyer</li>
+                            <li>Commercial invoice</li>
+                            <li>Packing list</li>
+                            <li>Certificate of origin (if applicable)</li>
+                        </ul>
+                    </div>
+                    <div class="step-actions">
+                        <button class="btn btn-primary">Upload Documents</button>
+                        <button class="btn btn-secondary">Generate Template</button>
+                    </div>
+                </div>
+
+                <div class="step-content" id="food-safety" style="display: none;">
+                    <h2 class="step-title">Food Safety Compliance</h2>
+                    <div class="step-description">
+                        <p>Ensure your food products meet French and EU safety standards.</p>
+                    </div>
+                    <div class="step-instructions">
+                        <h3>Safety requirements:</h3>
+                        <ul class="instruction-list">
+                            <li>HACCP certification</li>
+                            <li>Food safety documentation</li>
+                            <li>Allergen declarations</li>
+                            <li>Temperature control records</li>
+                        </ul>
+                    </div>
+                    <div class="step-actions">
+                        <button class="btn btn-primary">Check Compliance</button>
+                        <button class="btn btn-secondary">View Requirements</button>
+                    </div>
+                </div>
+
+                <div class="step-content" id="labeling" style="display: none;">
+                    <h2 class="step-title">Product Labeling</h2>
+                    <div class="step-description">
+                        <p>Ensure your products are properly labeled according to French regulations.</p>
+                    </div>
+                    <div class="step-instructions">
+                        <h3>Labeling requirements:</h3>
+                        <ul class="instruction-list">
+                            <li>Product name and description in French</li>
+                            <li>Ingredient list and allergens</li>
+                            <li>Nutritional information</li>
+                            <li>Origin and manufacturer details</li>
+                        </ul>
+                    </div>
+                    <div class="step-actions">
+                        <button class="btn btn-primary">Check Labels</button>
+                        <button class="btn btn-secondary">Label Generator</button>
+                    </div>
+                </div>
+
+                <div class="step-content" id="transport" style="display: none;">
+                    <h2 class="step-title">Transport & Logistics</h2>
+                    <div class="step-description">
+                        <p>Organize transportation and ensure all logistics are in place.</p>
+                    </div>
+                    <div class="step-instructions">
+                        <h3>Transport checklist:</h3>
+                        <ul class="instruction-list">
+                            <li>Choose appropriate transport method</li>
+                            <li>Arrange customs clearance</li>
+                            <li>Prepare shipping documentation</li>
+                            <li>Ensure proper packaging and handling</li>
+                        </ul>
+                    </div>
+                    <div class="step-actions">
+                        <button class="btn btn-primary">Find Transport</button>
+                        <button class="btn btn-secondary">Track Shipment</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
