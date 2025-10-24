@@ -28,12 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (targetContent) {
                 targetContent.style.display = 'block';
                 
-                // Scroll to top of content area to ensure consistent positioning
-                const contentArea = document.querySelector('.content-area');
-                if (contentArea) {
-                    contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-                
                 // Add a subtle animation effect
                 targetContent.style.opacity = '0';
                 targetContent.style.transform = 'translateY(10px)';
