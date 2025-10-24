@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EU Cross-Border Helper</title>
+    <title>Cross Border Helper</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,8 +13,35 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <h1 class="header-title">EU Cross-Border Helper</h1>
-            <p class="header-subtitle">Your guide to exporting goods from Belgium to France</p>
+            <div class="header-content">
+                <div class="header-logo">
+                    <img src="logo.svg" alt="EU Market Entry Logo" class="app-logo">
+                </div>
+                <div class="header-text">
+                    <h1 class="header-title">Cross Border Helper</h1>
+                    <p class="header-subtitle">Your guide to exporting goods from Belgium to France</p>
+                </div>
+            </div>
+            
+            <!-- Context Bar -->
+            <div class="context-bar">
+                <div class="context-section">
+                    <span class="context-label">Company:</span>
+                    <div class="context-pills">
+                        <span class="context-pill company-pill" data-context="exporter">BE exporter</span>
+                        <span class="context-pill company-pill" data-context="entity">No FR entity</span>
+                        <span class="context-pill company-pill" data-context="logistics">3PL</span>
+                    </div>
+                </div>
+                <div class="context-section">
+                    <span class="context-label">Project:</span>
+                    <div class="context-pills">
+                        <span class="context-pill project-pill" data-context="product">Organic tomatoes</span>
+                        <span class="context-pill project-pill" data-context="buyer">Carrefour France</span>
+                        <span class="context-pill project-pill" data-context="objectives">Protect payment</span>
+                    </div>
+                </div>
+            </div>
         </header>
 
         <!-- Main Content Area -->
@@ -24,7 +51,13 @@
                 <nav class="sidebar-nav">
                     <ul class="nav-list">
                         <li class="nav-item">
-                            <a href="#vat-check" class="nav-link active" data-step="vat-check">
+                            <a href="#intake" class="nav-link active" data-step="intake">
+                                <span class="nav-icon">📝</span>
+                                <span class="nav-text">Intake</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#vat-check" class="nav-link" data-step="vat-check">
                                 <span class="nav-icon">🔍</span>
                                 <span class="nav-text">VAT Check</span>
                             </a>
@@ -53,115 +86,931 @@
                                 <span class="nav-text">Transport</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="#overview" class="nav-link" data-step="overview">
+                                <span class="nav-icon">📊</span>
+                                <span class="nav-text">Project Overview</span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </aside>
 
-            <!-- Main Content -->
-            <main class="content">
-                <div class="step-content" id="vat-check">
-                    <h2 class="step-title">VAT Number Validation</h2>
+            <!-- Main Content Area -->
+            <div class="content-area">
+                <!-- Main Content -->
+                <main class="content">
+                <div class="step-content" id="intake">
+                    <h2 class="step-title">Company Intake & Context</h2>
                     <div class="step-description">
-                        <p>Validate your VAT number and ensure compliance with French tax requirements.</p>
+                        <p>Provide your company information and export objectives to customize your export guidance.</p>
                     </div>
-                    <div class="step-instructions">
-                        <h3>What you need to do:</h3>
-                        <ul class="instruction-list">
-                            <li>Verify your Belgian VAT number is valid</li>
-                            <li>Check if you need to register for French VAT</li>
-                            <li>Understand the reverse charge mechanism</li>
-                            <li>Prepare necessary tax documentation</li>
-                        </ul>
+                    
+                    <!-- Intake Form -->
+                    <div class="intake-form-container">
+                        <div class="intake-form-card">
+                            <form class="intake-form">
+                                <!-- Company Setup Section -->
+                                <div class="form-section company-section">
+                                    <div class="section-header">
+                                        <h3 class="section-title">🏢 Company Setup</h3>
+                                        <p class="section-description">One-time company requirements to export from Belgium to France</p>
+                                    </div>
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label for="country-establishment" class="form-label">Country of Establishment</label>
+                                            <select id="country-establishment" class="form-select" data-context="exporter">
+                                                <option value="BE" selected>Belgium</option>
+                                                <option value="NL">Netherlands</option>
+                                                <option value="DE">Germany</option>
+                                                <option value="LU">Luxembourg</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="has-fr-entity" class="form-label">Has French Entity</label>
+                                            <select id="has-fr-entity" class="form-select" data-context="entity">
+                                                <option value="no" selected>No</option>
+                                                <option value="yes">Yes</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="organic-code" class="form-label">Organic Operator Code</label>
+                                            <input type="text" id="organic-code" class="form-input" value="BE-BIO-001" placeholder="e.g., BE-BIO-001">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="uses-3pl" class="form-label">Uses 3PL (Third-Party Logistics)</label>
+                                            <select id="uses-3pl" class="form-select" data-context="logistics">
+                                                <option value="yes" selected>Yes</option>
+                                                <option value="no">No</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="vat-number" class="form-label">Belgian VAT Number</label>
+                                            <input type="text" id="vat-number" class="form-input" value="BE0123456789" placeholder="e.g., BE0123456789">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="company-name" class="form-label">Company Name</label>
+                                            <input type="text" id="company-name" class="form-input" value="BioTom Belgium BV" placeholder="Your company name">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Project-Specific Section -->
+                                <div class="form-section project-section">
+                                    <div class="section-header">
+                                        <h3 class="section-title">📋 This Contract</h3>
+                                        <p class="section-description">Project-specific requirements for this customer and shipment</p>
+                                    </div>
+                                    
+                                    <!-- Customer Details -->
+                                    <div class="subsection">
+                                        <h4 class="subsection-title">Customer Information</h4>
+                                        <div class="form-grid">
+                                            <div class="form-group">
+                                                <label for="buyer-type" class="form-label">Buyer Type</label>
+                                                <select id="buyer-type" class="form-select" data-context="buyer">
+                                                    <option value="fr-supermarkets" selected>French Supermarkets</option>
+                                                    <option value="b2b-intra-eu">B2B Intra-EU</option>
+                                                    <option value="wholesale">Wholesale</option>
+                                                    <option value="retail">Retail</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="customer-name" class="form-label">Customer Name</label>
+                                                <input type="text" id="customer-name" class="form-input" value="Carrefour France" placeholder="Customer company name">
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="customer-vat" class="form-label">Customer VAT Number</label>
+                                                <input type="text" id="customer-vat" class="form-input" value="FR12345678901" placeholder="e.g., FR12345678901">
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="business-model" class="form-label">Business Model</label>
+                                                <select id="business-model" class="form-select">
+                                                    <option value="fixed" selected>Fixed</option>
+                                                    <option value="flexible">Flexible</option>
+                                                    <option value="seasonal">Seasonal</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Product Details -->
+                                    <div class="subsection">
+                                        <h4 class="subsection-title">Product Information</h4>
+                                        <div class="form-grid">
+                                            <div class="form-group">
+                                                <label for="product-name" class="form-label">Product Name</label>
+                                                <input type="text" id="product-name" class="form-input" value="Organic tomatoes" data-context="product" readonly>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="product-variety" class="form-label">Variety</label>
+                                                <input type="text" id="product-variety" class="form-input" value="Cherry tomatoes" placeholder="e.g., Cherry tomatoes">
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="quantity" class="form-label">Quantity</label>
+                                                <input type="text" id="quantity" class="form-input" value="1000 kg" placeholder="e.g., 1000 kg">
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="delivery-date" class="form-label">Delivery Date</label>
+                                                <input type="date" id="delivery-date" class="form-input" value="2024-02-15">
+                                            </div>
+                                            
+                                            <div class="form-group full-width">
+                                                <label for="packaging-notes" class="form-label">Packaging Notes</label>
+                                                <textarea id="packaging-notes" class="form-textarea" rows="3" placeholder="Describe packaging details (e.g., 500g clamshells, biodegradable packaging)">500g clamshells, biodegradable packaging, EU organic certification labels</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Contract Priorities -->
+                                    <div class="subsection">
+                                        <h4 class="subsection-title">Contract Priorities</h4>
+                                        <div class="checkbox-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="checkbox-input" value="protect-payment" checked>
+                                                <span class="checkbox-custom"></span>
+                                                <span class="checkbox-text">Protect payment</span>
+                                            </label>
+                                            
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="checkbox-input" value="define-liability" checked>
+                                                <span class="checkbox-custom"></span>
+                                                <span class="checkbox-text">Define liability</span>
+                                            </label>
+                                            
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="checkbox-input" value="ensure-compliance" checked>
+                                                <span class="checkbox-custom"></span>
+                                                <span class="checkbox-text">Ensure compliance</span>
+                                            </label>
+                                            
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="checkbox-input" value="minimize-fr-registrations" checked>
+                                                <span class="checkbox-custom"></span>
+                                                <span class="checkbox-text">Minimize FR registrations</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Contract Essentials -->
+                                    <div class="subsection">
+                                        <h4 class="subsection-title">Contract Essentials</h4>
+                                        <div class="checkbox-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="checkbox-input" value="payment-terms" checked>
+                                                <span class="checkbox-custom"></span>
+                                                <span class="checkbox-text">Payment terms</span>
+                                            </label>
+                                            
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="checkbox-input" value="liability-cap" checked>
+                                                <span class="checkbox-custom"></span>
+                                                <span class="checkbox-text">Liability cap</span>
+                                            </label>
+                                            
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="checkbox-input" value="recall-traceability" checked>
+                                                <span class="checkbox-custom"></span>
+                                                <span class="checkbox-text">Recall and traceability</span>
+                                            </label>
+                                            
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="checkbox-input" value="governing-law" checked>
+                                                <span class="checkbox-custom"></span>
+                                                <span class="checkbox-text">Governing law</span>
+                                            </label>
+                                            
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="checkbox-input" value="bilingual-drafting" checked>
+                                                <span class="checkbox-custom"></span>
+                                                <span class="checkbox-text">Bilingual drafting</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-primary">Save & Continue</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="step-actions">
-                        <button class="btn btn-primary">Validate VAT Number</button>
-                        <button class="btn btn-secondary">Learn More</button>
+                </div>
+
+                <div class="step-content" id="vat-check" style="display: none;">
+                    <div class="step-header">
+                        <h2 class="step-title">VAT Number Validation</h2>
+                        <button class="btn btn-secondary get-advice-btn">Get Advice</button>
+                    </div>
+                    
+                    <!-- What this step covers -->
+                    <div class="step-section">
+                        <h3 class="section-title">What this step covers</h3>
+                        <p class="section-description">Validate your customer's French VAT number to ensure they're a legitimate business entity and properly registered for tax purposes. This is essential for B2B transactions and helps protect against fraud while ensuring proper tax treatment.</p>
+                    </div>
+                    
+                    <!-- VAT Check Form -->
+                    <div class="vat-form-container">
+                        <div class="vat-form-card">
+                            <h3 class="form-title">Customer & VAT Verification</h3>
+                            
+                            <form class="vat-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="country-code" class="form-label">Country Code</label>
+                                        <div class="input-group">
+                                            <input type="text" id="country-code" class="form-input" value="BE" readonly>
+                                            <span class="input-arrow">→</span>
+                                            <input type="text" class="form-input" value="FR" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="vat-number" class="form-label">Customer VAT Number</label>
+                                        <input type="text" id="vat-number" class="form-input" placeholder="Enter French VAT number (e.g., FR12345678901)">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-primary">Validate</button>
+                                </div>
+                            </form>
+                            
+                            <!-- Result Box -->
+                            <div class="result-box">
+                                <div class="result-placeholder">
+                                    <span class="result-icon">🔍</span>
+                                    <p class="result-text">Enter a VAT number and click Validate to check its status</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Guidance based on your Intake -->
+                    <div class="step-section">
+                        <h3 class="section-title">Guidance based on your Intake</h3>
+                        <div class="guidance-card">
+                            <ul class="guidance-list">
+                                <li><strong>Your situation:</strong> Belgian exporter selling to French supermarkets</li>
+                                <li><strong>Customer type:</strong> Carrefour France (large retailer) - expect valid VAT registration</li>
+                                <li><strong>Business model:</strong> Fixed contracts - VAT validation is critical for payment security</li>
+                                <li><strong>Your priority:</strong> Protect payment - valid VAT ensures proper B2B treatment</li>
+                                <li><strong>Compliance focus:</strong> Minimize FR registrations - valid customer VAT avoids reverse charge complications</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Sources and References -->
+                    <div class="step-section">
+                        <h3 class="section-title">Sources and References</h3>
+                        <div class="sources-list">
+                            <a href="#" class="source-link">French VAT Number Validation Service</a>
+                            <a href="#" class="source-link">EU VAT Information Exchange System (VIES)</a>
+                            <a href="#" class="source-link">French Tax Authority (DGFiP) Business Directory</a>
+                            <a href="#" class="source-link">B2B VAT Rules for Intra-EU Trade</a>
+                            <a href="#" class="source-link">Belgian-French Tax Treaty Provisions</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="step-content" id="contracts" style="display: none;">
-                    <h2 class="step-title">Contracts & Documentation</h2>
-                    <div class="step-description">
-                        <p>Upload and generate essential contracts and legal documents for your export.</p>
+                    <div class="step-header">
+                        <h2 class="step-title">Contracts & Documentation</h2>
+                        <button class="btn btn-secondary get-advice-btn">Get Advice</button>
                     </div>
-                    <div class="step-instructions">
-                        <h3>Required documents:</h3>
-                        <ul class="instruction-list">
-                            <li>Sales contract with French buyer</li>
-                            <li>Commercial invoice</li>
-                            <li>Packing list</li>
-                            <li>Certificate of origin (if applicable)</li>
-                        </ul>
+                    
+                    <!-- What this step covers -->
+                    <div class="step-section">
+                        <h3 class="section-title">What this step covers</h3>
+                        <p class="section-description">Create legally binding contracts that protect your interests, define payment terms, establish liability limits, and ensure compliance with French and EU regulations. This includes sales agreements, delivery terms, and risk allocation.</p>
                     </div>
-                    <div class="step-actions">
-                        <button class="btn btn-primary">Upload Documents</button>
-                        <button class="btn btn-secondary">Generate Template</button>
+                    
+                    <!-- Contract Workflow Example -->
+                    <div class="workflow-example">
+                        <h3 class="workflow-title">Typical Contract Workflow</h3>
+                        <p class="workflow-description">Here's how contract negotiations typically work in practice:</p>
+                        
+                        <div class="workflow-steps">
+                            <div class="workflow-step" data-step="1">
+                                <div class="workflow-step-number">1</div>
+                                <div class="workflow-step-content">
+                                    <h4 class="workflow-step-title">First Draft</h4>
+                                    <p class="workflow-step-description">Lawyer searches for precedents, templates, or uses GenAI to generate initial contract draft based on your requirements.</p>
+                                    <div class="workflow-step-status">
+                                        <span class="status-badge pending">Not Started</span>
+                                        <button class="btn btn-sm start-step-btn" data-step="1">Start Step</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="workflow-step" data-step="2">
+                                <div class="workflow-step-number">2</div>
+                                <div class="workflow-step-content">
+                                    <h4 class="workflow-step-title">Client Review</h4>
+                                    <p class="workflow-step-description">Draft is sent to you for review to ensure it reflects your factual situation and needs. Then sent to counterparty (Carrefour France).</p>
+                                    <div class="workflow-step-status">
+                                        <span class="status-badge pending">Not Started</span>
+                                        <button class="btn btn-sm start-step-btn" data-step="2">Start Step</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="workflow-step" data-step="3">
+                                <div class="workflow-step-number">3</div>
+                                <div class="workflow-step-content">
+                                    <h4 class="workflow-step-title">Counterparty Review</h4>
+                                    <p class="workflow-step-description">Carrefour reviews and sends back redlined version with track changes and comment balloons in Word.</p>
+                                    <div class="workflow-step-status">
+                                        <span class="status-badge pending">Not Started</span>
+                                        <button class="btn btn-sm start-step-btn" data-step="3">Start Step</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="workflow-step" data-step="4">
+                                <div class="workflow-step-number">4</div>
+                                <div class="workflow-step-content">
+                                    <h4 class="workflow-step-title">Negotiation Rounds</h4>
+                                    <p class="workflow-step-description">Multiple back-and-forth exchanges with track changes, comment balloons, and potentially calls to negotiate outstanding points.</p>
+                                    <div class="workflow-step-status">
+                                        <span class="status-badge pending">Not Started</span>
+                                        <button class="btn btn-sm start-step-btn" data-step="4">Start Step</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="workflow-step" data-step="5">
+                                <div class="workflow-step-number">5</div>
+                                <div class="workflow-step-content">
+                                    <h4 class="workflow-step-title">Electronic Signature</h4>
+                                    <p class="workflow-step-description">Final contract is signed electronically using tools like DocuSign once all parties agree.</p>
+                                    <div class="workflow-step-status">
+                                        <span class="status-badge pending">Not Started</span>
+                                        <button class="btn btn-sm start-step-btn" data-step="5">Start Step</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="workflow-step" data-step="6">
+                                <div class="workflow-step-number">6</div>
+                                <div class="workflow-step-content">
+                                    <h4 class="workflow-step-title">Digital Storage</h4>
+                                    <p class="workflow-step-description">Contract is stored digitally in a contract management system or shared drive, with alerts for renewals and risks.</p>
+                                    <div class="workflow-step-status">
+                                        <span class="status-badge pending">Not Started</span>
+                                        <button class="btn btn-sm start-step-btn" data-step="6">Start Step</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contract Template Form -->
+                    <div class="contract-form-container">
+                        <div class="contract-form-card">
+                            <h3 class="form-title">Contractual & Commercial Documentation</h3>
+                            
+                            <form class="contract-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="incoterms" class="form-label">Incoterms</label>
+                                        <select id="incoterms" class="form-select">
+                                            <option value="">Select Incoterms</option>
+                                            <option value="DDP">DDP - Delivered Duty Paid</option>
+                                            <option value="DAP">DAP - Delivered at Place</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="payment-terms" class="form-label">Payment Terms</label>
+                                        <select id="payment-terms" class="form-select">
+                                            <option value="">Select Payment Terms</option>
+                                            <option value="60-days-invoice">60 days from invoice date</option>
+                                            <option value="45-days-eom">45 days end of month</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="product-description" class="form-label">Product Description</label>
+                                        <textarea id="product-description" class="form-textarea" rows="4" placeholder="Describe your product in detail (e.g., Organic Belgian Apples, Red Delicious variety, Grade A, 20kg boxes)"></textarea>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-primary">Generate Template</button>
+                                </div>
+                            </form>
+                            
+                            <!-- Contract Preview Box -->
+                            <div class="contract-preview">
+                                <h4 class="preview-title">Contract Preview</h4>
+                                <div class="preview-box">
+                                    <div class="preview-placeholder">
+                                        <span class="preview-icon">📄</span>
+                                        <p class="preview-text">Fill in the form above and click "Generate Template" to see your contract preview</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Guidance based on your Intake -->
+                    <div class="step-section">
+                        <h3 class="section-title">Guidance based on your Intake</h3>
+                        <div class="guidance-card">
+                            <ul class="guidance-list">
+                                <li><strong>Your priority:</strong> Protect payment - focus on secure payment terms and guarantees</li>
+                                <li><strong>Customer type:</strong> Carrefour France - expect standard retail contract terms</li>
+                                <li><strong>Product:</strong> Organic tomatoes - ensure organic certification requirements are met</li>
+                                <li><strong>Liability focus:</strong> Define liability cap to limit your exposure</li>
+                                <li><strong>Compliance need:</strong> Bilingual drafting (French/English) for clarity</li>
+                                <li><strong>Business model:</strong> Fixed contracts - standardize terms for efficiency</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Sources and References -->
+                    <div class="step-section">
+                        <h3 class="section-title">Sources and References</h3>
+                        <div class="sources-list">
+                            <a href="#" class="source-link">French Commercial Code (Code de commerce)</a>
+                            <a href="#" class="source-link">EU Consumer Rights Directive</a>
+                            <a href="#" class="source-link">Incoterms 2020 Official Rules</a>
+                            <a href="#" class="source-link">Belgian-French Commercial Law Guide</a>
+                            <a href="#" class="source-link">Organic Food Contract Templates</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="step-content" id="food-safety" style="display: none;">
-                    <h2 class="step-title">Food Safety Compliance</h2>
-                    <div class="step-description">
-                        <p>Ensure your food products meet French and EU safety standards.</p>
+                    <div class="step-header">
+                        <h2 class="step-title">Food Safety Compliance</h2>
+                        <button class="btn btn-secondary get-advice-btn">Get Advice</button>
                     </div>
-                    <div class="step-instructions">
-                        <h3>Safety requirements:</h3>
-                        <ul class="instruction-list">
-                            <li>HACCP certification</li>
-                            <li>Food safety documentation</li>
-                            <li>Allergen declarations</li>
-                            <li>Temperature control records</li>
-                        </ul>
+                    
+                    <!-- What this step covers -->
+                    <div class="step-section">
+                        <h3 class="section-title">What this step covers</h3>
+                        <p class="section-description">Ensure your organic tomatoes meet all French and EU food safety standards, including organic certification, traceability requirements, and quality controls. This step helps you verify that all necessary certifications are current and valid.</p>
                     </div>
-                    <div class="step-actions">
-                        <button class="btn btn-primary">Check Compliance</button>
-                        <button class="btn btn-secondary">View Requirements</button>
+                    
+                    <!-- Food Safety Certifications -->
+                    <div class="certifications-container">
+                        <div class="certifications-card">
+                            <h3 class="certifications-title">Food Safety & Certification</h3>
+                            <p class="certifications-subtitle">Monitor your certification status and validity dates</p>
+                            
+                            <div class="certifications-table">
+                                <div class="certification-item">
+                                    <div class="cert-info">
+                                        <h4 class="cert-name">EU-BIO</h4>
+                                        <p class="cert-desc">European Organic Certification</p>
+                                    </div>
+                                    <div class="cert-date">
+                                        <label class="date-label">Valid until:</label>
+                                        <input type="date" class="date-input" value="2025-12-31">
+                                    </div>
+                                    <div class="cert-badge valid">
+                                        <span class="badge-text">Valid</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="certification-item">
+                                    <div class="cert-info">
+                                        <h4 class="cert-name">FASFC</h4>
+                                        <p class="cert-desc">Federal Agency for Food Safety</p>
+                                    </div>
+                                    <div class="cert-date">
+                                        <label class="date-label">Valid until:</label>
+                                        <input type="date" class="date-input" value="2024-06-15">
+                                    </div>
+                                    <div class="cert-badge expired">
+                                        <span class="badge-text">Expired</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="certification-item">
+                                    <div class="cert-info">
+                                        <h4 class="cert-name">GlobalG.A.P.</h4>
+                                        <p class="cert-desc">Global Good Agricultural Practice</p>
+                                    </div>
+                                    <div class="cert-date">
+                                        <label class="date-label">Valid until:</label>
+                                        <input type="date" class="date-input" value="2025-03-20">
+                                    </div>
+                                    <div class="cert-badge valid">
+                                        <span class="badge-text">Valid</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="certification-item">
+                                    <div class="cert-info">
+                                        <h4 class="cert-name">IFS Food</h4>
+                                        <p class="cert-desc">International Featured Standards</p>
+                                    </div>
+                                    <div class="cert-date">
+                                        <label class="date-label">Valid until:</label>
+                                        <input type="date" class="date-input" value="2024-11-30">
+                                    </div>
+                                    <div class="cert-badge warning">
+                                        <span class="badge-text">Expires Soon</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Guidance based on your Intake -->
+                    <div class="step-section">
+                        <h3 class="section-title">Guidance based on your Intake</h3>
+                        <div class="guidance-card">
+                            <ul class="guidance-list">
+                                <li><strong>Your product:</strong> Organic tomatoes - requires EU-BIO certification</li>
+                                <li><strong>Your code:</strong> BE-BIO-001 - verify this matches your organic operator registration</li>
+                                <li><strong>Customer:</strong> Carrefour France - expect strict organic certification requirements</li>
+                                <li><strong>Compliance priority:</strong> Ensure compliance - food safety is non-negotiable</li>
+                                <li><strong>Traceability need:</strong> Recall and traceability - critical for organic products</li>
+                                <li><strong>Packaging:</strong> 500g clamshells with EU organic labels - ensure proper certification display</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Sources and References -->
+                    <div class="step-section">
+                        <h3 class="section-title">Sources and References</h3>
+                        <div class="sources-list">
+                            <a href="#" class="source-link">EU Organic Regulation (2018/848)</a>
+                            <a href="#" class="source-link">French Food Safety Agency (ANSES)</a>
+                            <a href="#" class="source-link">Belgian Federal Agency for Food Safety (FASFC)</a>
+                            <a href="#" class="source-link">GlobalG.A.P. Certification Standards</a>
+                            <a href="#" class="source-link">IFS Food Standard Requirements</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="step-content" id="labeling" style="display: none;">
-                    <h2 class="step-title">Product Labeling</h2>
-                    <div class="step-description">
-                        <p>Ensure your products are properly labeled according to French regulations.</p>
+                    <div class="step-header">
+                        <h2 class="step-title">Product Labeling</h2>
+                        <button class="btn btn-secondary get-advice-btn">Get Advice</button>
                     </div>
-                    <div class="step-instructions">
-                        <h3>Labeling requirements:</h3>
-                        <ul class="instruction-list">
-                            <li>Product name and description in French</li>
-                            <li>Ingredient list and allergens</li>
-                            <li>Nutritional information</li>
-                            <li>Origin and manufacturer details</li>
-                        </ul>
+                    
+                    <!-- What this step covers -->
+                    <div class="step-section">
+                        <h3 class="section-title">What this step covers</h3>
+                        <p class="section-description">Create compliant product labels that meet French and EU requirements for organic products, including mandatory information, organic certification logos, and proper language requirements. This ensures your products can be legally sold in France.</p>
                     </div>
-                    <div class="step-actions">
-                        <button class="btn btn-primary">Check Labels</button>
-                        <button class="btn btn-secondary">Label Generator</button>
+                    
+                    <!-- Label Creator -->
+                    <div class="label-creator-container">
+                        <div class="label-creator-card">
+                            <h3 class="form-title">Label Creator</h3>
+                            
+                            <div class="label-creator-content">
+                                <form class="label-form">
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label for="product-name" class="form-label">Product Name</label>
+                                            <input type="text" id="product-name" class="form-input" placeholder="e.g., Pommes Bio Belgique">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="category" class="form-label">Category</label>
+                                            <input type="text" id="category" class="form-input" placeholder="e.g., Fruits">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="origin" class="form-label">Origin</label>
+                                            <input type="text" id="origin" class="form-input" placeholder="e.g., Belgique">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="variety" class="form-label">Variety</label>
+                                            <input type="text" id="variety" class="form-input" placeholder="e.g., Red Delicious">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="operator-code" class="form-label">Operator Code</label>
+                                            <input type="text" id="operator-code" class="form-input" placeholder="e.g., BE-BIO-001">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="batch-number" class="form-label">Batch Number</label>
+                                            <input type="text" id="batch-number" class="form-input" placeholder="e.g., L2024001">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <button type="button" class="btn btn-primary">Preview Label</button>
+                                    </div>
+                                </form>
+                                
+                                <!-- Label Preview -->
+                                <div class="label-preview-section">
+                                    <h4 class="preview-title">Label Preview (A6 Format)</h4>
+                                    <div class="label-preview">
+                                        <div class="label-box">
+                                            <div class="label-placeholder">
+                                                <span class="label-icon">🏷️</span>
+                                                <p class="label-text">Fill in the form and click "Preview Label" to see your product label</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Guidance based on your Intake -->
+                    <div class="step-section">
+                        <h3 class="section-title">Guidance based on your Intake</h3>
+                        <div class="guidance-card">
+                            <ul class="guidance-list">
+                                <li><strong>Your product:</strong> Organic cherry tomatoes - requires EU organic logo and certification</li>
+                                <li><strong>Your code:</strong> BE-BIO-001 - must be displayed on organic products</li>
+                                <li><strong>Customer:</strong> Carrefour France - expect high-quality, compliant labeling standards</li>
+                                <li><strong>Packaging:</strong> 500g clamshells - ensure adequate space for all required information</li>
+                                <li><strong>Language need:</strong> Bilingual drafting - French labels required for French market</li>
+                                <li><strong>Traceability:</strong> Batch numbers and origin must be clearly visible</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Sources and References -->
+                    <div class="step-section">
+                        <h3 class="section-title">Sources and References</h3>
+                        <div class="sources-list">
+                            <a href="#" class="source-link">EU Food Information to Consumers Regulation</a>
+                            <a href="#" class="source-link">French Labeling Requirements (DGCCRF)</a>
+                            <a href="#" class="source-link">EU Organic Logo Guidelines</a>
+                            <a href="#" class="source-link">Belgian Organic Labeling Standards</a>
+                            <a href="#" class="source-link">Fresh Produce Labeling Best Practices</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="step-content" id="transport" style="display: none;">
-                    <h2 class="step-title">Transport & Logistics</h2>
-                    <div class="step-description">
-                        <p>Organize transportation and ensure all logistics are in place.</p>
+                    <div class="step-header">
+                        <h2 class="step-title">Transport & Logistics</h2>
+                        <button class="btn btn-secondary get-advice-btn">Get Advice</button>
                     </div>
-                    <div class="step-instructions">
-                        <h3>Transport checklist:</h3>
-                        <ul class="instruction-list">
-                            <li>Choose appropriate transport method</li>
-                            <li>Arrange customs clearance</li>
-                            <li>Prepare shipping documentation</li>
-                            <li>Ensure proper packaging and handling</li>
-                        </ul>
+                    
+                    <!-- What this step covers -->
+                    <div class="step-section">
+                        <h3 class="section-title">What this step covers</h3>
+                        <p class="section-description">Generate essential transport documents for shipping organic tomatoes from Belgium to France, including CMR waybills, delivery notes, and packing lists. This ensures proper documentation for cross-border transport and delivery confirmation.</p>
                     </div>
-                    <div class="step-actions">
-                        <button class="btn btn-primary">Find Transport</button>
-                        <button class="btn btn-secondary">Track Shipment</button>
+                    
+                    <!-- Transport Documents -->
+                    <div class="transport-documents-container">
+                        <div class="transport-documents-card">
+                            <h3 class="form-title">Transport Planning</h3>
+                            <p class="transport-subtitle">Generate the required transport documentation</p>
+                            
+                            <div class="documents-grid">
+                                <div class="document-box">
+                                    <div class="document-icon">📋</div>
+                                    <h4 class="document-title">CMR Waybill</h4>
+                                    <p class="document-desc">International road transport document for goods transportation between EU countries</p>
+                                    <button class="btn btn-primary document-btn">Generate</button>
+                                </div>
+                                
+                                <div class="document-box">
+                                    <div class="document-icon">📦</div>
+                                    <h4 class="document-title">Delivery Note</h4>
+                                    <p class="document-desc">Document accompanying goods during delivery, confirming receipt and condition</p>
+                                    <button class="btn btn-primary document-btn">Generate</button>
+                                </div>
+                                
+                                <div class="document-box">
+                                    <div class="document-icon">📄</div>
+                                    <h4 class="document-title">Packing List</h4>
+                                    <p class="document-desc">Detailed list of all items in the shipment with quantities and descriptions</p>
+                                    <button class="btn btn-primary document-btn">Generate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Guidance based on your Intake -->
+                    <div class="step-section">
+                        <h3 class="section-title">Guidance based on your Intake</h3>
+                        <div class="guidance-card">
+                            <ul class="guidance-list">
+                                <li><strong>Your setup:</strong> Using 3PL - coordinate with your logistics provider</li>
+                                <li><strong>Route:</strong> Belgium to France - intra-EU transport requires CMR waybill</li>
+                                <li><strong>Product:</strong> Organic tomatoes - ensure temperature-controlled transport if needed</li>
+                                <li><strong>Customer:</strong> Carrefour France - expect detailed delivery documentation</li>
+                                <li><strong>Quantity:</strong> 1000 kg - ensure proper weight documentation</li>
+                                <li><strong>Delivery date:</strong> 2024-02-15 - plan transport timing accordingly</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Sources and References -->
+                    <div class="step-section">
+                        <h3 class="section-title">Sources and References</h3>
+                        <div class="sources-list">
+                            <a href="#" class="source-link">CMR Convention for International Road Transport</a>
+                            <a href="#" class="source-link">EU Transport Documentation Requirements</a>
+                            <a href="#" class="source-link">French Customs Documentation Guide</a>
+                            <a href="#" class="source-link">Belgian Transport Authority Guidelines</a>
+                            <a href="#" class="source-link">Fresh Produce Transport Best Practices</a>
+                        </div>
                     </div>
                 </div>
-            </main>
+
+                <div class="step-content" id="overview" style="display: none;">
+                    <h2 class="step-title">Project Overview</h2>
+                    <div class="step-description">
+                        <p>Monitor your export progress and manage all shipments to France.</p>
+                    </div>
+                    
+                    <!-- Summary Dashboard -->
+                    <div class="dashboard-container">
+                        <div class="dashboard-card">
+                            <h3 class="form-title">Export Progress</h3>
+                            
+                            <!-- Progress Bar -->
+                            <div class="progress-section">
+                                <div class="progress-header">
+                                    <span class="progress-label">Overall Completion</span>
+                                    <span class="progress-percentage">0%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Shipments Table -->
+                            <div class="shipments-section">
+                                <div class="shipments-header">
+                                    <h4 class="shipments-title">Recent Shipments</h4>
+                                    <button class="btn btn-primary">Start New Shipment</button>
+                                </div>
+                                
+                                <div class="shipments-table">
+                                    <div class="table-header">
+                                        <div class="table-cell">Shipment ID</div>
+                                        <div class="table-cell">Buyer</div>
+                                        <div class="table-cell">VAT Validated</div>
+                                        <div class="table-cell">Status</div>
+                                    </div>
+                                    
+                                    <div class="table-row">
+                                        <div class="table-cell">SH-2024-001</div>
+                                        <div class="table-cell">Fruits & Co. Paris</div>
+                                        <div class="table-cell">
+                                            <span class="status-badge success">Yes</span>
+                                        </div>
+                                        <div class="table-cell">
+                                            <span class="status-badge success">Completed</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="table-row">
+                                        <div class="table-cell">SH-2024-002</div>
+                                        <div class="table-cell">Bio Market Lyon</div>
+                                        <div class="table-cell">
+                                            <span class="status-badge warning">Pending</span>
+                                        </div>
+                                        <div class="table-cell">
+                                            <span class="status-badge warning">In Progress</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="table-row">
+                                        <div class="table-cell">SH-2024-003</div>
+                                        <div class="table-cell">Fresh Direct Marseille</div>
+                                        <div class="table-cell">
+                                            <span class="status-badge error">No</span>
+                                        </div>
+                                        <div class="table-cell">
+                                            <span class="status-badge error">Blocked</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </main>
+
+                <!-- Status Tracker -->
+                <aside class="status-tracker">
+                    <div class="status-card">
+                        <h3 class="status-title">Export Status</h3>
+                        
+                        <!-- Overall Progress -->
+                        <div class="status-section">
+                            <h4 class="status-section-title">Overall Progress</h4>
+                            <div class="status-progress">
+                                <div class="status-progress-bar">
+                                    <div class="status-progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="status-progress-text">0% Complete</span>
+                            </div>
+                        </div>
+
+                        <!-- Step Status -->
+                        <div class="status-section">
+                            <h4 class="status-section-title">Step Status</h4>
+                            <div class="status-steps">
+                                <div class="status-step" data-step="vat-check">
+                                    <div class="status-step-icon">🔍</div>
+                                    <div class="status-step-info">
+                                        <span class="status-step-name">VAT Check</span>
+                                        <span class="status-step-status pending">Pending</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="status-step" data-step="contracts">
+                                    <div class="status-step-icon">📋</div>
+                                    <div class="status-step-info">
+                                        <span class="status-step-name">Contracts</span>
+                                        <span class="status-step-status pending">Pending</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="status-step" data-step="food-safety">
+                                    <div class="status-step-icon">🍎</div>
+                                    <div class="status-step-info">
+                                        <span class="status-step-name">Food Safety</span>
+                                        <span class="status-step-status pending">Pending</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="status-step" data-step="labeling">
+                                    <div class="status-step-icon">🏷️</div>
+                                    <div class="status-step-info">
+                                        <span class="status-step-name">Labeling</span>
+                                        <span class="status-step-status pending">Pending</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="status-step" data-step="transport">
+                                    <div class="status-step-icon">🚛</div>
+                                    <div class="status-step-info">
+                                        <span class="status-step-name">Transport</span>
+                                        <span class="status-step-status pending">Pending</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="status-section">
+                            <h4 class="status-section-title">Quick Actions</h4>
+                            <div class="status-actions">
+                                <button class="status-btn">Save Progress</button>
+                                <button class="status-btn">Export Data</button>
+                                <button class="status-btn">Get Help</button>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
         </div>
     </div>
 
+    <!-- Get Advice Side Panel -->
+    <div id="advice-panel" class="advice-panel">
+        <div class="advice-panel-content">
+            <div class="advice-panel-header">
+                <h3 class="advice-panel-title">Get Advice</h3>
+                <button class="advice-panel-close" id="close-advice-panel">×</button>
+            </div>
+            <div class="advice-panel-body">
+                <div class="advice-message" id="advice-message">
+                    <!-- Tailored advice message will be inserted here -->
+                </div>
+                <div class="advice-sources">
+                    <h4 class="advice-sources-title">Sources and References</h4>
+                    <div class="advice-sources-list" id="advice-sources-list">
+                        <!-- Sources will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="utils.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
